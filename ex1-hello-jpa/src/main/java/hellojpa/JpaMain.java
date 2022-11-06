@@ -19,10 +19,13 @@ public class JpaMain {
         try {
 
             //영속
-            Member member = new Member(200L, "member200");
-            em.persist(member);
+            Member member = em.find(Member.class, 150L);
+            member.setName("AAAAA");
 
-            em.flush();
+            em.clear(); //1차 캐시를 지운다.
+
+            //다시 DB에서 조회해와야 한다.
+            Member member2 = em.find(Member.class, 150L);
 
             System.out.println("======================");
             tx.commit();
