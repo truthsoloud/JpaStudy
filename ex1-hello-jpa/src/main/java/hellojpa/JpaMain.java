@@ -17,17 +17,6 @@ public class JpaMain {
         tx.begin();
 
         try {
-
-            //영속
-            Member member = em.find(Member.class, 150L);
-            member.setName("AAAAA");
-
-            em.clear(); //1차 캐시를 지운다.
-
-            //다시 DB에서 조회해와야 한다.
-            Member member2 = em.find(Member.class, 150L);
-
-            System.out.println("======================");
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

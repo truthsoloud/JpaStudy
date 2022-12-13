@@ -1,38 +1,38 @@
 package hellojpa;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
-@Entity //JPA가 관리하는 객체, DB table과 매핑해서 쓴다
-@Table(name = "MBR")
+@Entity
 public class Member {
 
+    //pk매핑
     @Id
     private Long id;
-    private String name;
 
+    //객체는 username이라고 쓰고 싶고 db에는 name이라고 쓰고 싶을 때
+    //db column명은 name
+    @Column(name = "name", nullable = false) //not null 제약조건
+    private String username;
 
-    public Member() {}
+    private Integer age;
 
-    public Member(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-    public Long getId() {
-        return id;
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
 
-    public String getName() {
-        return name;
-    }
+    //db에 varchar를 넘어서는 큰 컨텐츠를 넣고 싶을 때 Lob사용
+    @Lob
+    private String description;
 
-    public void setName(String name) {
-        this.name = name;
+    @Transient
+    private int temp;
+
+    public Member() {
     }
 }
