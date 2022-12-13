@@ -12,7 +12,7 @@ public class Member {
 
     //객체는 username이라고 쓰고 싶고 db에는 name이라고 쓰고 싶을 때
     //db column명은 name
-    @Column(name = "name", nullable = false) //not null 제약조건
+    @Column(name = "name", nullable = false, columnDefinition = "varchar(100) defualt 'EMPTY'") //not null 제약조건
     private String username;
 
     private Integer age;
