@@ -14,10 +14,8 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
-
-    //Mapping as N:1
+    //Mapping as N:1 (다대일 단방향-Team에서는 아래와 같이 매핑하지 않으므로)
+    //연관관계의 주인은 Member
     @ManyToOne
     @JoinColumn(name = "TEAM_ID") //column for join
     private Team team;
