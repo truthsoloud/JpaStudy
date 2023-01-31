@@ -17,20 +17,19 @@ public class JpaMain {
         tx.begin();
 
         try {
-
-            //저장
             Member member = new Member();
             member.setUsername("member1");
+
             em.persist(member);
 
             Team team = new Team();
-            team.setName("TeamA");
-            team.getMembers().add(member);
-            em.persist(team);
+            team.setName("teamA");
 
-            //영속성 컨텍스트 말고 DB에서 가져오는 걸 보고 싶다면
-            em.flush(); //강제 호출
-            em.clear(); //영속성 컨텍스트 초기화
+            //team엔티티를 저장하는데 옆 테이블에 가서 update할 수 밖에 없음. 어쩔 수 없이 쿼리가 하나 더 나가야하는 부분.
+            //이 구조의 또 하나의 문제점: 실무에는 테이블이 굉장히 많으므로 운영이 힘들어진다.
+            team.getMembers().add(member);
+
+            em.persist(team);
 
             tx.commit();
         } catch (Exception e) {
