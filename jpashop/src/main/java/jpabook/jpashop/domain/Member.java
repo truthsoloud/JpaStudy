@@ -7,16 +7,15 @@ import java.util.List;
 @Entity
 public class Member {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name="MEMBER_ID")
     private Long id;
+
     private String name;
     private String city;
     private String street;
     private String zipcode;
 
-    //비즈니스 적으로 member를 통해 OrderList를 볼 일은 거의 없으므로 사실 이 연관관계는 끊어내는 것이 더 깔끔할 수 있다는 것이 강사님의 의견
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
